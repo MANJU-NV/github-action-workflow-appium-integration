@@ -1,5 +1,33 @@
 name: trigger tests in another repository
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      flavor:
+        description: 'Flavor'     
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - prod
+          - stg
+          - dev
+      type:
+        description: 'Build Type - release/debug'     
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
+      release_notes:
+        description: 'Release Notes'
+        required: false
+      version_name:
+        description: 'Version Name (major.minor.patch)  '
+        required: false
+      version_code:
+        description: 'Version Code '
+        required: false
 jobs:
   trigger-test:
     runs-on: ubuntu-latest
